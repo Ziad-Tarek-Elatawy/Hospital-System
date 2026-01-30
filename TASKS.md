@@ -2,6 +2,7 @@
 ## Team Members & Assignments
 
 ### Ziad Tarek (Leader)
+
 | Item | Details |
 |------|---------|
 | **Files** | `main.py` |
@@ -17,7 +18,8 @@
 
 -------------------------------------------------------------------------------
 
-### Sarah Ahmed
+### Ahmed Abdelnaby
+
 | Item | Details |
 |------|---------|
 | **File** | `model/person.py` |
@@ -26,14 +28,16 @@
 | **Dependencies** | None (Start First!) |
 
 **Class Specifications:**
+```python
 class Person:
- Attributes :
+    # Attributes
     name: str
     age: int
     
     # Methods
     def view_info(self) -> str:
         """Returns person information as a string"""
+```
 
 **Tasks:**
 - Create `Person` class with `__init__` method
@@ -44,7 +48,8 @@ class Person:
 
 -------------------------------------------------------------------------------
 
-### Yasmeen
+### Mohamed Mashhhour
+
 | Item | Details |
 |------|---------|
 | **File** | `model/patient.py` |
@@ -53,6 +58,7 @@ class Person:
 | **Dependencies** | Wait for `Person` class to be merged |
 
 **Class Specifications:**
+```python
 class Patient(Person):
     # Attributes (in addition to inherited ones)
     medical_record: str
@@ -60,6 +66,7 @@ class Patient(Person):
     # Methods
     def view_record(self) -> str:
         """Returns the patient's medical record"""
+```
 
 
 **Tasks:**
@@ -74,6 +81,7 @@ class Patient(Person):
 -------------------------------------------------------------------------------
 
 ### Mahmoud Youssef
+
 | Item | Details |
 |------|---------|
 | **File** | `model/staff.py` |
@@ -82,6 +90,7 @@ class Patient(Person):
 | **Dependencies** | Wait for `Person` class to be merged |
 
 **Class Specifications:**
+```python
 class Staff(Person):
     # Attributes (in addition to inherited ones)
     position: str
@@ -89,6 +98,7 @@ class Staff(Person):
     # Methods
     def view_info(self) -> str:
         """Override: Returns staff info including position"""
+```
 
 **Tasks:**
 - Import `Person` from `model.person`
@@ -101,7 +111,8 @@ class Staff(Person):
 
 -------------------------------------------------------------------------------
 
-### Ahmed Abdelnaby
+### Sarah Ahmed
+
 | Item | Details |
 |------|---------|
 | **File** | `model/department.py` |
@@ -110,6 +121,7 @@ class Staff(Person):
 | **Dependencies** | Wait for `Patient` and `Staff` classes to be merged |
 
 **Class Specifications:**
+```python
 class Department:
     # Attributes
     name: str
@@ -122,6 +134,7 @@ class Department:
     
     def add_staff(self, staff_member: Staff) -> None:
         """Adds a staff member to the department"""
+```
 
 **Tasks:**
 - Import `Patient` from `model.patient`
@@ -135,7 +148,8 @@ class Department:
 
 -------------------------------------------------------------------------------
 
-### Mohamed Mashhhour
+### Yasmeen
+
 | Item | Details |
 |------|---------|
 | **Files** | `model/hospital.py` + `core/system_manager.py` |
@@ -144,6 +158,8 @@ class Department:
 | **Dependencies** | Wait for `Department` class to be merged |
 
 **Class Specifications:**
+```python
+# model/hospital.py
 class Hospital:
     # Attributes
     name: str
@@ -161,6 +177,7 @@ class SystemManager:
     # - Display all departments
     # - Display all patients
     # - Display all staff
+```
 
 **Tasks:**
 - Import `Department` from `model.department`
@@ -174,31 +191,33 @@ class SystemManager:
 
 ## 📊 Task Dependencies (Workflow)
 
-┌─────────────────┐
-│   Student 1     │
-│  Person Class   │
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    ▼         ▼
-┌─────────┐ ┌─────────┐
-│Student 2│ │Student 3│
-│ Patient │ │  Staff  │
-└────┬────┘ └────┬────┘
-     │           │
-     └─────┬─────┘
-           ▼
-    ┌─────────────┐
-    │  Student 4  │
-    │ Department  │
-    └──────┬──────┘
-           ▼
-    ┌─────────────┐
-    │  Student 5  │
-    │  Hospital   │
-    └──────┬──────┘
-           ▼
-    ┌─────────────┐
-    │   Leader    │
-    │   main.py   │
-    └─────────────┘
+```
+┌───────────────────┐
+│  Ahmed Abdelnaby  │
+│   Person Class    │
+└─────────┬─────────┘
+          │
+     ┌────┴────┐
+     ▼         ▼
+┌──────────────────┐ ┌───────────────┐
+│Mohamed Mashhhour │ │Mahmoud Youssef│
+│     Patient      │ │    Staff      │
+└────────┬─────────┘ └───────┬───────┘
+         │                   │
+         └─────────┬─────────┘
+                   ▼
+         ┌─────────────────┐
+         │   Sarah Ahmed   │
+         │   Department    │
+         └────────┬────────┘
+                  ▼
+         ┌─────────────────┐
+         │     Yasmeen     │
+         │    Hospital     │
+         └────────┬────────┘
+                  ▼
+         ┌─────────────────┐
+         │   Ziad Tarek    │
+         │    main.py      │
+         └─────────────────┘
+```

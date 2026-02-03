@@ -7,6 +7,9 @@ class Person:
         """
         Initializes the Person class with name and age.
         """
+        if age < 0:
+           raise ValueError("Age cannot be negative!")
+
         self.name = name
         self.age = age
 

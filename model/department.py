@@ -15,10 +15,13 @@ class Department:
         Adds a patient to the department
         """
         self.patients.append(patient)
+        print(f"Patient '{patient.name}' added to {self.name} department.")
 
-    def add_staff_member(self, staff: Staff) -> None:
+    def add_staff_member(self, staff_member: Staff) -> None:
         """
         Adds a staff member to the department
         """
-        self.staff.append(staff)
+        self.staff.append(staff_member)
+        print(f"Staff '{staff_member.name}' added to {self.name} department.")
+
         

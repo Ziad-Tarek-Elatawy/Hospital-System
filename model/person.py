@@ -7,9 +7,10 @@ class Person:
         """
         Initializes the Person class with name and age.
         """
-        if age < 0:
-           raise ValueError("Age cannot be negative!")
-
+        # Input validation
+        if not isinstance(name, str) or not isinstance(age, int):
+            raise TypeError("Name must be a string and age must be an integer!")
+        
         self.name = name
         self.age = age
 

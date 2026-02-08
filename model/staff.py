@@ -5,6 +5,9 @@ class Staff(Person):
     """Class for hospital staff, inheriting from Person."""
 
     def __init__(self, name: str, age: int, position: str):
+        """
+        Initializes the Staff class with name, age, and position.
+        """
         super().__init__(name, age)
         self.position = position
 

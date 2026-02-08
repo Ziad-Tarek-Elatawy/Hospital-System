@@ -5,7 +5,7 @@
 
 | Item | Details |
 |------|---------|
-| **Files** | `main.py` |
+| **Files** | `main.py` + `data/hospital_data.json` |
 | **Responsibility** | Application Entry Point + Integration |
 | **Branch** | `feature/main-application` |
 | **Dependencies** | All other tasks must be completed first |

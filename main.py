@@ -22,7 +22,7 @@ def clear_screen():
 def print_header(title: str):
     """Prints a formatted header."""
     print("\n" + "=" * 60)
-    print(f"{'🏥 ' + title + ' 🏥':^60}")
+    print(f"{title:^60}")
     print("=" * 60)
 
 
@@ -30,23 +30,23 @@ def print_menu(hospital_name: str):
     """Prints the main menu."""
 
     print("\n╔══════════════════════════════════════════════════════════╗")
-    print("║            🏥 HOSPITAL MANAGEMENT SYSTEM                 ║")
+    print("║            HOSPITAL MANAGEMENT SYSTEM                    ║")
     print(f"║                  {hospital_name}                          ║")
     print("╠══════════════════════════════════════════════════════════╣")
     print("║                                                          ║")
-    print("║   [1] 👥 View All Patients                               ║")
-    print("║   [2] 👨‍⚕️ View All Staff                                 ║")
-    print("║   [3] 🏢 View All Departments                            ║")
-    print("║   [4] ➕ Add New Patient                                 ║")
-    print("║   [5] ➕ Add New Staff Member                            ║")
-    print("║   [6] ➕ Add New Department                              ║")
-    print("║   [7] 📊 Hospital Statistics                             ║")
-    print("║   [8] 💾 Save Data                                       ║")
-    print("║   [9]  🔍 Search Patient                                 ║")
-    print("║   [10] 🔍 Search Staff                                   ║")
-    print("║   [11] 🗑️  Delete Patient                                 ║")
-    print("║   [12] 🗑️  Delete Staff                                   ║")
-    print("║   [0] 🚪 Exit                                            ║")
+    print("║   [1]  View All Patients                                 ║")
+    print("║   [2]  View All Staff                                    ║")
+    print("║   [3]  View All Departments                              ║")
+    print("║   [4]  Add New Patient                                   ║")
+    print("║   [5]  Add New Staff Member                              ║")
+    print("║   [6]  Add New Department                                ║")
+    print("║   [7]  Hospital Statistics                               ║")
+    print("║   [8]  Save Data                                         ║")
+    print("║   [9]   Search Patient                                   ║")
+    print("║   [10]  Search Staff                                     ║")
+    print("║   [11]  Delete Patient                                   ║")
+    print("║   [12]  Delete Staff                                     ║")
+    print("║   [0]  Exit                                              ║")
     print("║                                                          ║")
     print("╚══════════════════════════════════════════════════════════╝")
 
@@ -90,10 +90,10 @@ def load_data() -> Hospital:
         return hospital
     # Exception handling    
     except FileNotFoundError:
-        print("⚠️  Data file not found. Creating new hospital...")
+        print("  Data file not found. Creating new hospital...")
         return Hospital("Cairo Hospital", "Cairo, Egypt")
     except json.JSONDecodeError:
-        print("⚠️  Error reading data file. Creating new hospital...")
+        print("  Error reading data file. Creating new hospital...")
         return Hospital("Cairo Hospital", "Cairo, Egypt")
 
 
@@ -135,7 +135,7 @@ def save_data(hospital: Hospital):
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
     
-    print("\n✅ Data saved successfully!")
+    print("\n Data saved successfully!")
 
 
 def view_all_patients(manager: SystemManager):
@@ -156,7 +156,7 @@ def view_all_departments(hospital: Hospital):
     """Displays all departments in the hospital."""
     print_header("ALL DEPARTMENTS")
     if not hospital.departments:
-        print("\n⚠️  No departments found!")
+        print("\n  No departments found!")
     else:
         print(f"\n{'#':<5}{'Department Name':<30}{'Patients':<12}{'Staff':<12}")
         print("-" * 59)
@@ -170,14 +170,14 @@ def add_patient(hospital: Hospital):
     print_header("ADD NEW PATIENT")
     
     if not hospital.departments:
-        print("\n⚠️  No departments available! Please add a department first.")
+        print("\n  No departments available! Please add a department first.")
         input("\nPress Enter to return to main menu...")
         return
     
     try:
         name = input("\nEnter Patient Name: ").strip()
         if not name:
-            print("❌ Name cannot be empty!")
+            print(" Name cannot be empty!")
             return
             
         age = int(input("Enter Patient Age: "))
@@ -192,15 +192,15 @@ def add_patient(hospital: Hospital):
         if 0 <= dept_choice < len(hospital.departments):
             patient = Patient(name, age, medical_record)
             hospital.departments[dept_choice].add_patient(patient)
-            print(f"\n✅ Patient '{name}' added successfully!")
+            print(f"\n Patient '{name}' added successfully!")
             
             # Auto-save
             save_data(hospital)
         else:
-            print("❌ Invalid department selection!")
+            print(" Invalid department selection!")
             
     except ValueError as e:
-        print(f"❌ Invalid input: {e}")
+        print(f" Invalid input: {e}")
     
     input("\nPress Enter to return to main menu...")
 
@@ -210,14 +210,14 @@ def add_staff(hospital: Hospital):
     print_header("ADD NEW STAFF MEMBER")
     
     if not hospital.departments:
-        print("\n⚠️  No departments available! Please add a department first.")
+        print("\n  No departments available! Please add a department first.")
         input("\nPress Enter to return to main menu...")
         return
     
     try:
         name = input("\nEnter Staff Name: ").strip()
         if not name:
-            print("❌ Name cannot be empty!")
+            print(" Name cannot be empty!")
             return
             
         age = int(input("Enter Staff Age: "))
@@ -232,15 +232,15 @@ def add_staff(hospital: Hospital):
         if 0 <= dept_choice < len(hospital.departments):
             staff_member = Staff(name, age, position)
             hospital.departments[dept_choice].add_staff_member(staff_member)
-            print(f"\n✅ Staff '{name}' added successfully!")
+            print(f"\n Staff '{name}' added successfully!")
             
             # Auto-save
             save_data(hospital)
         else:
-            print("❌ Invalid department selection!")
+            print(" Invalid department selection!")
             
     except ValueError as e:
-        print(f"❌ Invalid input: {e}")
+        print(f" Invalid input: {e}")
     
     input("\nPress Enter to return to main menu...")
 
@@ -252,11 +252,11 @@ def add_department(hospital: Hospital):
     name = input("\nEnter Department Name: ").strip()
     
     if not name:
-        print("❌ Department name cannot be empty!")
+        print(" Department name cannot be empty!")
     else:
         department = Department(name)
         hospital.add_department(department)
-        print(f"\n✅ Department '{name}' added successfully!")
+        print(f"\n Department '{name}' added successfully!")
         
         # Auto-save
         save_data(hospital)
@@ -271,12 +271,12 @@ def show_statistics(hospital: Hospital):
     total_patients = sum(len(dept.patients) for dept in hospital.departments)
     total_staff = sum(len(dept.staff) for dept in hospital.departments)
     
-    print(f"\n   🏥 Hospital: {hospital.name}")
-    print(f"   📍 Location: {hospital.location}")
+    print(f"\n    Hospital: {hospital.name}")
+    print(f"    Location: {hospital.location}")
     print("\n   ┌─────────────────────────────────────┐")
-    print(f"   │ 🏢 Departments:     {len(hospital.departments):<15}│")
-    print(f"   │ 👥 Total Patients:  {total_patients:<15}│")
-    print(f"   │ 👨‍⚕️ Total Staff:     {total_staff:<15}│")
+    print(f"   │  Departments:     {len(hospital.departments):<15}│")
+    print(f"   │  Total Patients:  {total_patients:<15}│")
+    print(f"   │  Total Staff:     {total_staff:<15}│")
     print("   └─────────────────────────────────────┘")
     
     if hospital.departments:
@@ -293,7 +293,7 @@ def search_patient(hospital: Hospital):
     
     name = input("\nEnter Patient Name to search: ").strip().lower()
     if not name:
-        print("❌ Name cannot be empty!")
+        print(" Name cannot be empty!")
         input("\nPress Enter to return to main menu...")
         return
     
@@ -302,13 +302,13 @@ def search_patient(hospital: Hospital):
         for patient in dept.patients:
             if name in patient.name.lower():
                 found = True
-                print(f"\n✅ Found in {dept.name} department:")
+                print(f"\n Found in {dept.name} department:")
                 print(f"   Name: {patient.name}")
                 print(f"   Age: {patient.age}")
                 print(f"   Medical Record: {patient.medical_record}")
     
     if not found:
-        print(f"\n❌ No patient found with name containing '{name}'")
+        print(f"\n No patient found with name containing '{name}'")
     
     input("\nPress Enter to return to main menu...")
 
@@ -319,7 +319,7 @@ def search_staff(hospital: Hospital):
     
     name = input("\nEnter Staff Name to search: ").strip().lower()
     if not name:
-        print("❌ Name cannot be empty!")
+        print(" Name cannot be empty!")
         input("\nPress Enter to return to main menu...")
         return
     
@@ -328,13 +328,13 @@ def search_staff(hospital: Hospital):
         for staff in dept.staff:
             if name in staff.name.lower():
                 found = True
-                print(f"\n✅ Found in {dept.name} department:")
+                print(f"\n Found in {dept.name} department:")
                 print(f"   Name: {staff.name}")
                 print(f"   Age: {staff.age}")
                 print(f"   Position: {staff.position}")
     
     if not found:
-        print(f"\n❌ No staff found with name containing '{name}'")
+        print(f"\n No staff found with name containing '{name}'")
     
     input("\nPress Enter to return to main menu...")
 
@@ -345,7 +345,7 @@ def delete_patient(hospital: Hospital):
     
     name = input("\nEnter Patient Name to delete: ").strip().lower()
     if not name:
-        print("❌ Name cannot be empty!")
+        print(" Name cannot be empty!")
         input("\nPress Enter to return to main menu...")
         return
     
@@ -353,21 +353,21 @@ def delete_patient(hospital: Hospital):
     for dept in hospital.departments:
         for i, patient in enumerate(dept.patients):
             if name in patient.name.lower():
-                print(f"\n⚠️  Found: {patient.name} (Age: {patient.age})")
+                print(f"\n  Found: {patient.name} (Age: {patient.age})")
                 print(f"   Department: {dept.name}")
                 confirm = input("\n   Are you sure you want to delete? (y/n): ").strip().lower()
                 
                 if confirm == 'y':
                     dept.patients.pop(i)
                     save_data(hospital)
-                    print(f"\n✅ Patient '{patient.name}' deleted successfully!")
+                    print(f"\n Patient '{patient.name}' deleted successfully!")
                 else:
-                    print("\n❌ Deletion cancelled.")
+                    print("\n Deletion cancelled.")
                 
                 input("\nPress Enter to return to main menu...")
                 return
     
-    print(f"\n❌ No patient found with name containing '{name}'")
+    print(f"\n No patient found with name containing '{name}'")
     input("\nPress Enter to return to main menu...")
 
 
@@ -377,7 +377,7 @@ def delete_staff(hospital: Hospital):
     
     name = input("\nEnter Staff Name to delete: ").strip().lower()
     if not name:
-        print("❌ Name cannot be empty!")
+        print(" Name cannot be empty!")
         input("\nPress Enter to return to main menu...")
         return
     
@@ -385,31 +385,31 @@ def delete_staff(hospital: Hospital):
     for dept in hospital.departments:
         for i, staff in enumerate(dept.staff):
             if name in staff.name.lower():
-                print(f"\n⚠️  Found: {staff.name} (Position: {staff.position})")
+                print(f"\n  Found: {staff.name} (Position: {staff.position})")
                 print(f"   Department: {dept.name}")
                 confirm = input("\n   Are you sure you want to delete? (y/n): ").strip().lower()
                 
                 if confirm == 'y':
                     dept.staff.pop(i)
                     save_data(hospital)
-                    print(f"\n✅ Staff '{staff.name}' deleted successfully!")
+                    print(f"\n Staff '{staff.name}' deleted successfully!")
                 else:
-                    print("\n❌ Deletion cancelled.")
+                    print("\n Deletion cancelled.")
                 
                 input("\nPress Enter to return to main menu...")
                 return
     
-    print(f"\n❌ No staff found with name containing '{name}'")
+    print(f"\n No staff found with name containing '{name}'")
     input("\nPress Enter to return to main menu...")
 
 
 def main():
     """Main application entry point."""
     # Load data from JSON
-    print("🔄 Loading data from file...")
+    print(" Loading data from file...")
     hospital = load_data()
     manager = SystemManager(hospital)
-    print(f"✅ Loaded {len(hospital.departments)} departments!\n")
+    print(f" Loaded {len(hospital.departments)} departments!\n")
     
     while True:
         clear_screen()
@@ -446,16 +446,16 @@ def main():
             elif choice == "0":
                 # Save before exit
                 save_data(hospital)
-                print("\n👋 Thank you for using Hospital Management System!")
+                print("\n Thank you for using Hospital Management System!")
                 print("   Goodbye!\n")
                 break
             else:
-                print("❌ Invalid choice! Please try again.")
+                print(" Invalid choice! Please try again.")
                 input("\nPress Enter to continue...")
                 
         except KeyboardInterrupt:
             save_data(hospital)
-            print("\n\n👋 Goodbye!")
+            print("\n\n Goodbye!")
             break
 
 
